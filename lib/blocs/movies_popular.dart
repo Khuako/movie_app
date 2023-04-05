@@ -14,7 +14,7 @@ class MoviesPopularBloc {
     moviePopularListFetcher.sink.add(popularMovieList);
   }
 
-  dispose() {
+  void dispose() {
     moviePopularListFetcher.close();
   }
 }
