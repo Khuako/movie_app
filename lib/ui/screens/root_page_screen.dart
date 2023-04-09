@@ -1,10 +1,19 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/blocs/cubit/box_office_cubit_cubit.dart';
+import 'package:movies_app/blocs/cubit/movie_detail_cubit.dart';
+import 'package:movies_app/blocs/cubit/popular_movie_cubit_cubit.dart';
+import 'package:movies_app/blocs/cubit/popular_tv_cubit_cubit.dart';
+import 'package:movies_app/blocs/cubit/recommended_movie_cubit.dart';
 import 'package:movies_app/constants.dart';
+import 'package:movies_app/models/recommended_movies.dart';
+import 'package:movies_app/resources/movie_api_provider.dart';
 import 'package:movies_app/ui/screens/profile_page_screen.dart';
 import 'package:movies_app/ui/screens/search_page_screen.dart';
 
+import '../../blocs/cubit/coming_soon_cubit.dart';
 import 'favorites_page_screen.dart';
 import 'home_page_screen.dart';
 
@@ -35,7 +44,6 @@ class _RootPageScreenState extends State<RootPageScreen> {
     'Favorites',
     'Profile',
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

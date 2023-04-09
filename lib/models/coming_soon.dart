@@ -1,14 +1,14 @@
 class ComingSoon {
-  List<Items>? items;
+  List<ComingSoonFilm>? items;
   String? errorMessage;
 
   ComingSoon({this.items, this.errorMessage});
 
   ComingSoon.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <ComingSoonFilm>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(new ComingSoonFilm.fromJson(v));
       });
     }
     errorMessage = json['errorMessage'];
@@ -24,7 +24,7 @@ class ComingSoon {
   }
 }
 
-class Items {
+class ComingSoonFilm {
   String? id;
   String? title;
   String? fullTitle;
@@ -45,7 +45,7 @@ class Items {
   String? stars;
   List<StarList>? starList;
 
-  Items(
+  ComingSoonFilm(
       {this.id,
       this.title,
       this.fullTitle,
@@ -66,7 +66,7 @@ class Items {
       this.stars,
       this.starList});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  ComingSoonFilm.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     fullTitle = json['fullTitle'];

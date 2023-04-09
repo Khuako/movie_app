@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/constants.dart';
+import 'package:movies_app/ui/screens/movie_detail_screen.dart';
 import 'package:movies_app/ui/screens/root_page_screen.dart';
+
+import 'blocs/cubit/box_office_cubit_cubit.dart';
+import 'blocs/cubit/coming_soon_cubit.dart';
+import 'blocs/cubit/movie_detail_cubit.dart';
+import 'blocs/cubit/popular_movie_cubit_cubit.dart';
+import 'blocs/cubit/popular_tv_cubit_cubit.dart';
+import 'blocs/cubit/recommended_movie_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,16 +22,39 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Constants.blackColor),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: ((context) => ComingSoonCubit()..getComingSoon()),
+        ),
+        BlocProvider(
+          create: ((context) => BoxOfficeCubitCubit()..getAllBoxOffice()),
+        ),
+        BlocProvider(
+          create: ((context) => PopularMovieCubitCubit()..getPopularMovies()),
+        ),
+        BlocProvider(
+          create: ((context) => PopularTvCubitCubit()..getPopularTv()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              RecommendedMovieCubit()..getAllRecommendedMovies(),
+        ),
+        BlocProvider(
+          create: ((context) => MovieDetailCubit()),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Constants.blackColor),
+          useMaterial3: true,
+        ),
+        routes: {
+          '/rootPage': (context) => RootPageScreen(),
+        },
+        initialRoute: '/rootPage',
       ),
-      routes: {
-        '/rootPage': (context) => RootPageScreen(),
-      },
-      initialRoute: '/rootPage',
     );
   }
 }

@@ -1,14 +1,14 @@
 class MostPopularMovies {
-  List<Items>? items;
+  List<PopularMovie>? items;
   String? errorMessage;
 
   MostPopularMovies({this.items, this.errorMessage});
 
   MostPopularMovies.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <PopularMovie>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(new PopularMovie.fromJson(v));
       });
     }
     errorMessage = json['errorMessage'];
@@ -24,7 +24,7 @@ class MostPopularMovies {
   }
 }
 
-class Items {
+class PopularMovie {
   String? id;
   String? rank;
   String? rankUpDown;
@@ -36,7 +36,7 @@ class Items {
   String? imDbRating;
   String? imDbRatingCount;
 
-  Items(
+  PopularMovie(
       {this.id,
       this.rank,
       this.rankUpDown,
@@ -48,7 +48,7 @@ class Items {
       this.imDbRating,
       this.imDbRatingCount});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  PopularMovie.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     rank = json['rank'];
     rankUpDown = json['rankUpDown'];

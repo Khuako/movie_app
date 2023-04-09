@@ -1,14 +1,14 @@
 class BoxOffice {
-  List<Items>? items;
+  List<BoxOfficeFilm>? items;
   String? errorMessage;
 
   BoxOffice({this.items, this.errorMessage});
 
   BoxOffice.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <BoxOfficeFilm>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(new BoxOfficeFilm.fromJson(v));
       });
     }
     errorMessage = json['errorMessage'];
@@ -24,7 +24,7 @@ class BoxOffice {
   }
 }
 
-class Items {
+class BoxOfficeFilm {
   String? id;
   String? rank;
   String? title;
@@ -33,7 +33,7 @@ class Items {
   String? gross;
   String? weeks;
 
-  Items(
+  BoxOfficeFilm(
       {this.id,
       this.rank,
       this.title,
@@ -42,7 +42,7 @@ class Items {
       this.gross,
       this.weeks});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  BoxOfficeFilm.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     rank = json['rank'];
     title = json['title'];
