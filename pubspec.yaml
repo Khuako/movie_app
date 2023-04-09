@@ -40,6 +40,7 @@ dependencies:
   rxdart: ^0.27.7
   cached_network_image: ^3.2.3
   animated_bottom_navigation_bar: ^1.2.0
+  flutter_bloc: ^8.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

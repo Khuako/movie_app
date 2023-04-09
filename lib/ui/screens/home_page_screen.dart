@@ -42,17 +42,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    context.read<PopularMovieCubitCubit>().close();
-    context.read<PopularTvCubitCubit>().close();
-    context.read<BoxOfficeCubitCubit>().close();
-    context.read<RecommendedMovieCubit>().close();
-    context.read<ComingSoonCubit>().close();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
@@ -106,8 +95,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 BlocBuilder<PopularMovieCubitCubit, PopularMovieCubitState>(
                     builder: (context, state) {
                   if (state is PopularMovieCubitSuccess) {
-                    return ListMovieWidget().listMovieWidget(
-                        context, state.popularMoviesList, _selectedIndex);
+                    return ListMovieWidget().listMovieWidget(context,
+                        state.popularMoviesList, _selectedIndex, 'Home');
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -117,8 +106,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 BlocBuilder<ComingSoonCubit, ComingSoonState>(
                     builder: (context, state) {
                   if (state is ComingSoonLoaded) {
-                    return ListMovieWidget().listMovieWidget(
-                        context, state.comingSoonFilmsList, _selectedIndex);
+                    return ListMovieWidget().listMovieWidget(context,
+                        state.comingSoonFilmsList, _selectedIndex, 'Home');
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -128,8 +117,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 BlocBuilder<BoxOfficeCubitCubit, BoxOfficeCubitState>(
                     builder: (context, state) {
                   if (state is BoxOfficeCubitSuccess) {
-                    return ListMovieWidget().listMovieWidget(
-                        context, state.boxOfficeFilmList, _selectedIndex);
+                    return ListMovieWidget().listMovieWidget(context,
+                        state.boxOfficeFilmList, _selectedIndex, 'Home');
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -140,7 +129,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     builder: (context, state) {
                   if (state is PopularTvCubitSuccess) {
                     return ListMovieWidget().listMovieWidget(
-                        context, state.popularTvList, _selectedIndex);
+                        context, state.popularTvList, _selectedIndex, 'Home');
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -177,14 +166,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   void _clickOnMovie(String movieId, BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return MovieDetailScreen(movieId: movieId);
-        },
-      ),
-    );
+    Navigator.of(context).pushReplacementNamed('/movie_details',
+        arguments: {'movieId': movieId, 'sourceScreen': 'Home'});
   }
 
   SizedBox _recommendedMovieListWidget(

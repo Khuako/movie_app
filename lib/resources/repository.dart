@@ -5,6 +5,7 @@ import 'package:movies_app/models/most_popular_movies.dart';
 import 'package:movies_app/models/most_popular_tvs.dart';
 import 'package:movies_app/models/movie_detail.dart';
 import 'package:movies_app/models/recommended_movies.dart';
+import 'package:movies_app/models/search_title.dart';
 import 'package:movies_app/resources/movie_api_provider.dart';
 
 class Repository {
@@ -20,4 +21,6 @@ class Repository {
       movieApiProvider.fetchRecommendedMovies();
   Future<MovieDetail> fetchAllMovieDetail(String movieId) =>
       movieApiProvider.fetchMovieDetail(movieId);
+  Future<SearchTitle> fetchAllSearchTitle(String query) =>
+      movieApiProvider.fetchSearchTitle(query);
 }

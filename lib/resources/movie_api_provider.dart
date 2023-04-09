@@ -15,6 +15,8 @@ import 'package:movies_app/models/most_popular_tvs.dart';
 import 'package:movies_app/models/movie_detail.dart';
 import 'package:movies_app/models/recommended_movies.dart';
 
+import '../models/search_title.dart';
+
 class MovieApiProvider {
   Client client = Client();
   final apiKey = "/k_cfscy5r0/";
@@ -56,5 +58,11 @@ class MovieApiProvider {
     final response =
         await client.get(Uri.parse(baseUrl + 'Title' + apiKey + movieId));
     return MovieDetail.fromJson(json.decode(response.body));
+  }
+
+  Future<SearchTitle> fetchSearchTitle(String query) async {
+    final response =
+        await client.get(Uri.parse(baseUrl + 'SearchTitle' + apiKey + query));
+    return SearchTitle.fromJson(json.decode(response.body));
   }
 }

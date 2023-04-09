@@ -11,8 +11,8 @@ import '../widgets/radial_percent_widget.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   String movieId;
-  MovieDetailScreen({super.key, required this.movieId});
-
+  String sourceScreen;
+  MovieDetailScreen({required this.movieId, required this.sourceScreen});
   @override
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();
 }
@@ -78,8 +78,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                ListMovieWidget()
-                    .listMovieWidget(context, state.movieDetail.similars!, 0),
+                ListMovieWidget().listMovieWidget(context,
+                    state.movieDetail.similars!, 0, widget.sourceScreen),
               ],
             )),
           );
@@ -111,33 +111,31 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               child: CircularProgressIndicator(),
             ),
             maxHeightDiskCache: 800,
-            maxWidthDiskCache: 900,
+            maxWidthDiskCache: 800,
             fit: BoxFit.cover,
             alignment: Alignment.topCenter,
           ),
         ),
-        SafeArea(
-          child: Positioned(
-            top: 10,
-            left: 10,
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Constants.whiteColor,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/rootPage');
-                  },
+        Positioned(
+          top: 30,
+          left: 10,
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  color: Constants.whiteColor,
+                  size: 30,
                 ),
-                const Text(
-                  'Back to Home',
-                  style: Constants.titleTextStyle,
-                ),
-              ],
-            ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed('/rootPage');
+                },
+              ),
+              Text(
+                'Back to ${widget.sourceScreen}',
+                style: Constants.titleTextStyle,
+              ),
+            ],
           ),
         ),
         Positioned(
@@ -182,7 +180,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          element.contentRating!,
+          element.contentRating ?? 'PG-13',
           style: Constants.movieSummery,
         ),
         Text(
@@ -262,12 +260,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   Padding _descrWidget(MovieDetail element) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Expanded(
-        child: Text(
-          element.plot!,
-          style: const TextStyle(
-              color: Colors.white, fontFamily: 'Ms', fontSize: 15),
-        ),
+      child: Text(
+        element.plot!,
+        style: const TextStyle(
+            color: Colors.white, fontFamily: 'Ms', fontSize: 15),
       ),
     );
   }
@@ -301,12 +297,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: CachedNetworkImage(
-                        imageUrl: element.actorList![index].image!,
+                        imageUrl: element.actorList![index].image ??
+                            'https://sun6-21.userapi.com/s/v1/ig2/WQo3ZaP0xNQxBPqcpEq_eSkiKblznoWTr3l0PznJ5SDIZZxXHuI7LVwHqNnAeQWohZTDaNCvx7Xqvvr5KHTmuqdv.jpg?size=400x0&quality=96&crop=143,23,433,433&ava=1',
                         fit: BoxFit.cover,
                         maxHeightDiskCache: 200,
                         maxWidthDiskCache: 200,
-                        placeholder: (context, url) =>
-                            Center(child: CircularProgressIndicator()),
+                        placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(
+                          color: Constants.yellowColor,
+                        )),
                       ),
                     ),
                     const SizedBox(

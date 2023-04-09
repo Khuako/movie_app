@@ -6,18 +6,14 @@ import '../../constants.dart';
 import '../screens/movie_detail_screen.dart';
 
 class ListMovieWidget {
-  void _clickOnMovie(String movieId, BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return MovieDetailScreen(movieId: movieId);
-        },
-      ),
-    );
+  void _clickOnMovie(
+      String movieId, BuildContext context, String sourceScreen) {
+    Navigator.of(context).pushReplacementNamed('/movie_details',
+        arguments: {'movieId': movieId, 'sourceScreen': sourceScreen});
   }
 
-  SizedBox listMovieWidget(BuildContext context, List movieList, int index) {
+  SizedBox listMovieWidget(
+      BuildContext context, List movieList, int index, String sourceScreen) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .4,
       child: ListView.builder(
@@ -26,7 +22,8 @@ class ListMovieWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, indexOf) {
           return InkWell(
-            onTap: () => _clickOnMovie(movieList[indexOf].id, context),
+            onTap: () =>
+                _clickOnMovie(movieList[indexOf].id, context, sourceScreen),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(

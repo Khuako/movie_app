@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/blocs/cubit/search_title_cubit.dart';
 import 'package:movies_app/constants.dart';
+import 'package:movies_app/ui/screens/home_page_screen.dart';
 import 'package:movies_app/ui/screens/movie_detail_screen.dart';
 import 'package:movies_app/ui/screens/root_page_screen.dart';
 
@@ -43,6 +45,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: ((context) => MovieDetailCubit()),
         ),
+        BlocProvider(
+          create: ((context) => SearchTitleCubit()),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -52,6 +57,15 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/rootPage': (context) => RootPageScreen(),
+          '/rootPage/homeScreen': (context) => HomePageScreen(),
+          '/movie_details': (context) {
+            final arguments = (ModalRoute.of(context)?.settings.arguments ??
+                <String, dynamic>{}) as Map;
+            return MovieDetailScreen(
+              movieId: arguments['movieId'],
+              sourceScreen: arguments['sourceScreen'],
+            );
+          },
         },
         initialRoute: '/rootPage',
       ),
