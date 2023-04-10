@@ -9,7 +9,8 @@ class Constants {
       fontSize: 12,
       color: Constants.whiteColor,
       fontFamily: 'Ms',
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w900,
+      decoration: TextDecoration.none);
   static const TextStyle titleTextStylePink = TextStyle(
       fontSize: 12,
       color: Colors.pink,
@@ -37,4 +38,11 @@ class Constants {
       fontFamily: 'Ms',
       fontSize: 16,
       fontWeight: FontWeight.w600);
+  static const TextStyle searchTextStyle = TextStyle(
+      fontSize: 15,
+      color: Constants.whiteColor,
+      fontFamily: 'Ms',
+      fontWeight: FontWeight.w900,
+      decoration: TextDecoration.none,
+      decorationColor: Colors.white);
 }

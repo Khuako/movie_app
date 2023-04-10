@@ -122,15 +122,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           child: Row(
             children: [
               IconButton(
-                icon: const Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  color: Constants.whiteColor,
-                  size: 30,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('/rootPage');
-                },
-              ),
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: Constants.whiteColor,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    if (widget.sourceScreen == 'Home') {
+                      Navigator.of(context).pushReplacementNamed('/rootPage');
+                    }
+                    Navigator.of(context).pushReplacementNamed('/rootPage');
+                  }),
               Text(
                 'Back to ${widget.sourceScreen}',
                 style: Constants.titleTextStyle,

@@ -166,7 +166,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   void _clickOnMovie(String movieId, BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/movie_details',
+    Navigator.of(context).pushReplacementNamed(
+        '/rootPage/homeScreen/movie_details',
         arguments: {'movieId': movieId, 'sourceScreen': 'Home'});
   }
 

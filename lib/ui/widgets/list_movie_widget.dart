@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/search_title.dart';
 
 import '../../constants.dart';
 import '../screens/movie_detail_screen.dart';
@@ -8,8 +9,82 @@ import '../screens/movie_detail_screen.dart';
 class ListMovieWidget {
   void _clickOnMovie(
       String movieId, BuildContext context, String sourceScreen) {
-    Navigator.of(context).pushReplacementNamed('/movie_details',
+    Navigator.of(context).pushReplacementNamed(
+        '/rootPage/homeScreen/movie_details',
         arguments: {'movieId': movieId, 'sourceScreen': sourceScreen});
+  }
+
+  Widget searchMovieWidget(BuildContext context, List<Results> movieList,
+      int index, String sourceScreen) {
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height,
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: movieList.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () => _clickOnMovie(movieList[index].id!, context, 'Search'),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: SizedBox(
+                width: MediaQuery.sizeOf(context).width * .5,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 0, left: 8, bottom: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width * .45,
+                          height: MediaQuery.sizeOf(context).height * .35,
+                          child: CachedNetworkImage(
+                            imageUrl: movieList[index].image != ''
+                                ? movieList[index].image!
+                                : "https://imdb-api.com/images/original/nopicture.jpg",
+                            maxWidthDiskCache: 400,
+                            maxHeightDiskCache: 400,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(
+                                color: Constants.yellowColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            movieList[index].title!,
+                            style: Constants.movieDetailTitle,
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            movieList[index].description!,
+                            style: Constants.genreTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   SizedBox listMovieWidget(

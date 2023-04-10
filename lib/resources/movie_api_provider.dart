@@ -20,7 +20,7 @@ import '../models/search_title.dart';
 class MovieApiProvider {
   Client client = Client();
   final apiKey = "/k_cfscy5r0/";
-  final baseUrl = "https://imdb-api.com/en/API/";
+  final baseUrl = "http://imdb-api.com/en/API/";
   //https://imdb-api.com/en/API/ComingSoon/k_cfscy5r0
   Future<FilmsList> fetchMovieList() async {
     // print('entered');
