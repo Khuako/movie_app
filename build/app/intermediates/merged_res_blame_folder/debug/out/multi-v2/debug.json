@@ -203,14 +203,14 @@
                     }
                 },
                 {
-                    "source": "C:\\movie_app\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
-                        "startOffsets": "176,832",
+                        "startOffsets": "173,818",
                         "endLines": "7,16",
                         "endColumns": "12,12",
-                        "endOffsets": "483,998"
+                        "endOffsets": "476,982"
                     },
                     "to": {
                         "startLines": "93,97",
@@ -1327,14 +1327,14 @@
             "outputFile": "com.example.movies_app-merged_res-11:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\movie_app\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
-                        "startOffsets": "175,831",
+                        "startOffsets": "172,817",
                         "endLines": "7,16",
                         "endColumns": "12,12",
-                        "endOffsets": "482,997"
+                        "endOffsets": "475,981"
                     },
                     "to": {
                         "startLines": "2,6",

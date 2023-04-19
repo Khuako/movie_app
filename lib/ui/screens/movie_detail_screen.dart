@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/blocs/cubit/bloc/favorite_list_bloc.dart';
+
 import 'package:movies_app/blocs/cubit/movie_detail_cubit.dart';
 import 'package:movies_app/ui/screens/home_page_screen.dart';
 import 'package:movies_app/ui/widgets/list_movie_widget.dart';
-
+import 'package:collection/collection.dart';
 import '../../constants.dart';
 import '../../models/movie_detail.dart';
 import '../widgets/radial_percent_widget.dart';
@@ -23,6 +25,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     // TODO: implement initState
     super.initState();
     context.read<MovieDetailCubit>().getMovieDetail(widget.movieId);
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
   }
 
   @override
@@ -92,65 +100,85 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     );
   }
 
-  Stack _topPosterWidget(Size size, MovieDetail element) {
-    return Stack(
-      children: [
-        Container(
-          width: size.width,
-          height: size.height * .5,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50),
-            ),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: CachedNetworkImage(
-            imageUrl: element.image!,
-            placeholder: (context, url) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            maxHeightDiskCache: 800,
-            maxWidthDiskCache: 800,
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-          ),
-        ),
-        Positioned(
-          top: 30,
-          left: 10,
-          child: Row(
-            children: [
-              IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: Constants.whiteColor,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    if (widget.sourceScreen == 'Home') {
-                      Navigator.of(context).pushReplacementNamed('/rootPage');
-                    }
-                    Navigator.of(context).pushReplacementNamed('/rootPage');
-                  }),
-              Text(
-                'Back to ${widget.sourceScreen}',
-                style: Constants.titleTextStyle,
+  Widget _topPosterWidget(Size size, MovieDetail element) {
+    return BlocBuilder<FavoriteListBloc, FavoriteListState>(
+      builder: (context, state) {
+        bool _isFav = false;
+        if (state.favouriteMovies?.isNotEmpty == true) {
+          MovieDetail? moviesFavourite = state.favouriteMovies
+              ?.firstWhereOrNull((element) => element.id == widget.movieId);
+          if (moviesFavourite != null) {
+            _isFav = true;
+          }
+        }
+        return Stack(
+          children: [
+            Container(
+              width: size.width,
+              height: size.height * .5,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                ),
               ),
-            ],
-          ),
-        ),
-        Positioned(
-          bottom: 20,
-          right: 20,
-          child: IconButton(
-            icon: Icon(Icons.favorite_outline),
-            color: Colors.white,
-            onPressed: () {},
-            iconSize: 30,
-          ),
-        ),
-      ],
+              clipBehavior: Clip.antiAlias,
+              child: CachedNetworkImage(
+                imageUrl: element.image!,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                maxHeightDiskCache: 800,
+                maxWidthDiskCache: 800,
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
+            ),
+            Positioned(
+              top: 30,
+              left: 10,
+              child: Row(
+                children: [
+                  IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed('/rootPage');
+                      }),
+                  Text(
+                    'Back to ${widget.sourceScreen}',
+                    style: Constants.titleTextStyle,
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 20,
+              right: 20,
+              child: IconButton(
+                icon: _isFav == false
+                    ? const Icon(
+                        Icons.favorite_outline,
+                        color: Colors.white,
+                      )
+                    : const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ),
+                onPressed: () {
+                  context
+                      .read<FavoriteListBloc>()
+                      .add(ChangedFavorites(model: element));
+                },
+                iconSize: 30,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -272,7 +300,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   Widget _actorsWidget(MovieDetail element) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           const Text(
@@ -315,8 +343,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     ),
                     Text(
                       element.actorList![index].name!,
-                      style:
-                          TextStyle(color: Constants.whiteColor, fontSize: 14),
+                      style: const TextStyle(
+                          color: Constants.whiteColor, fontSize: 14),
                     )
                   ],
                 ),

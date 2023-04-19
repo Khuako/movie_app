@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/blocs/cubit/bloc/favorite_list_bloc.dart';
 import 'package:movies_app/blocs/cubit/search_title_cubit.dart';
 import 'package:movies_app/constants.dart';
 import 'package:movies_app/ui/screens/home_page_screen.dart';
@@ -14,7 +15,7 @@ import 'blocs/cubit/popular_movie_cubit_cubit.dart';
 import 'blocs/cubit/popular_tv_cubit_cubit.dart';
 import 'blocs/cubit/recommended_movie_cubit.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -49,6 +50,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: ((context) => SearchTitleCubit()),
         ),
+        BlocProvider(
+          create: ((context) => FavoriteListBloc()),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -57,9 +61,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: {
-          '/rootPage': (context) => RootPageScreen(),
-          '/rootPage/homeScreen': (context) => HomePageScreen(),
-          '/rootPage/searchScreen': (context) => SearchPageScreen(),
+          '/rootPage': (context) => const RootPageScreen(),
+          '/rootPage/homeScreen': (context) => const HomePageScreen(),
+          '/rootPage/searchScreen': (context) => const SearchPageScreen(),
           '/rootPage/homeScreen/movie_details': (context) {
             final arguments = (ModalRoute.of(context)?.settings.arguments ??
                 <String, dynamic>{}) as Map;

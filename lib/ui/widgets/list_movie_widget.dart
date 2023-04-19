@@ -14,8 +14,8 @@ class ListMovieWidget {
         arguments: {'movieId': movieId, 'sourceScreen': sourceScreen});
   }
 
-  Widget searchMovieWidget(BuildContext context, List<Results> movieList,
-      int index, String sourceScreen) {
+  Widget searchMovieWidget(
+      BuildContext context, List movieList, int indexOf, String sourceScreen) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height,
       child: ListView.builder(
@@ -70,10 +70,39 @@ class ListMovieWidget {
                           const SizedBox(
                             height: 15,
                           ),
-                          Text(
-                            movieList[index].description!,
-                            style: Constants.genreTextStyle,
-                          ),
+                          indexOf == 0
+                              ? Text(
+                                  movieList[index].description!,
+                                  style: Constants.genreTextStyle,
+                                )
+                              : Row(
+                                  children: [
+                                    const Icon(Icons.star,
+                                        color: Constants.yellowColor, size: 28),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text:
+                                            '${movieList[index].imDbRating} / ',
+                                        style: const TextStyle(
+                                            color: Constants.whiteColor,
+                                            fontSize: 20,
+                                            fontFamily: 'Ms'),
+                                        children: const [
+                                          TextSpan(
+                                            text: '10',
+                                            style: TextStyle(
+                                                color: Constants.whiteColor,
+                                                fontSize: 14,
+                                                fontFamily: 'Ms'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                         ],
                       ),
                     ),

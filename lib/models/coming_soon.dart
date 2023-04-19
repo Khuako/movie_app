@@ -8,18 +8,18 @@ class ComingSoon {
     if (json['items'] != null) {
       items = <ComingSoonFilm>[];
       json['items'].forEach((v) {
-        items!.add(new ComingSoonFilm.fromJson(v));
+        items!.add(ComingSoonFilm.fromJson(v));
       });
     }
     errorMessage = json['errorMessage'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.items != null) {
-      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
-    data['errorMessage'] = this.errorMessage;
+    data['errorMessage'] = errorMessage;
     return data;
   }
 }
@@ -31,16 +31,16 @@ class ComingSoonFilm {
   String? year;
   String? releaseState;
   String? image;
-  Null? runtimeMins;
-  Null? runtimeStr;
-  Null? plot;
-  Null? contentRating;
-  Null? imDbRating;
-  Null? imDbRatingCount;
-  Null? metacriticRating;
+  Null runtimeMins;
+  Null runtimeStr;
+  Null plot;
+  Null contentRating;
+  Null imDbRating;
+  Null imDbRatingCount;
+  Null metacriticRating;
   String? genres;
   List<GenreList>? genreList;
-  Null? directors;
+  Null directors;
   List<DirectorList>? directorList;
   String? stars;
   List<StarList>? starList;
@@ -84,51 +84,51 @@ class ComingSoonFilm {
     if (json['genreList'] != null) {
       genreList = <GenreList>[];
       json['genreList'].forEach((v) {
-        genreList!.add(new GenreList.fromJson(v));
+        genreList!.add(GenreList.fromJson(v));
       });
     }
     directors = json['directors'];
     if (json['directorList'] != null) {
       directorList = <DirectorList>[];
       json['directorList'].forEach((v) {
-        directorList!.add(new DirectorList.fromJson(v));
+        directorList!.add(DirectorList.fromJson(v));
       });
     }
     stars = json['stars'];
     if (json['starList'] != null) {
       starList = <StarList>[];
       json['starList'].forEach((v) {
-        starList!.add(new StarList.fromJson(v));
+        starList!.add(StarList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['fullTitle'] = this.fullTitle;
-    data['year'] = this.year;
-    data['releaseState'] = this.releaseState;
-    data['image'] = this.image;
-    data['runtimeMins'] = this.runtimeMins;
-    data['runtimeStr'] = this.runtimeStr;
-    data['plot'] = this.plot;
-    data['contentRating'] = this.contentRating;
-    data['imDbRating'] = this.imDbRating;
-    data['imDbRatingCount'] = this.imDbRatingCount;
-    data['metacriticRating'] = this.metacriticRating;
-    data['genres'] = this.genres;
-    if (this.genreList != null) {
-      data['genreList'] = this.genreList!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['fullTitle'] = fullTitle;
+    data['year'] = year;
+    data['releaseState'] = releaseState;
+    data['image'] = image;
+    data['runtimeMins'] = runtimeMins;
+    data['runtimeStr'] = runtimeStr;
+    data['plot'] = plot;
+    data['contentRating'] = contentRating;
+    data['imDbRating'] = imDbRating;
+    data['imDbRatingCount'] = imDbRatingCount;
+    data['metacriticRating'] = metacriticRating;
+    data['genres'] = genres;
+    if (genreList != null) {
+      data['genreList'] = genreList!.map((v) => v.toJson()).toList();
     }
-    data['directors'] = this.directors;
-    if (this.directorList != null) {
-      data['directorList'] = this.directorList!.map((v) => v.toJson()).toList();
+    data['directors'] = directors;
+    if (directorList != null) {
+      data['directorList'] = directorList!.map((v) => v.toJson()).toList();
     }
-    data['stars'] = this.stars;
-    if (this.starList != null) {
-      data['starList'] = this.starList!.map((v) => v.toJson()).toList();
+    data['stars'] = stars;
+    if (starList != null) {
+      data['starList'] = starList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -146,15 +146,15 @@ class GenreList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['key'] = this.key;
-    data['value'] = this.value;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['key'] = key;
+    data['value'] = value;
     return data;
   }
 }
 
 class StarList {
-  Null? id;
+  Null id;
   String? name;
 
   StarList({this.id, this.name});
@@ -165,15 +165,15 @@ class StarList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }
 
 class DirectorList {
-  Null? id;
+  Null id;
   String? name;
 
   DirectorList({this.id, this.name});
@@ -184,9 +184,9 @@ class DirectorList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }

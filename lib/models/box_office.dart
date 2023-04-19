@@ -15,11 +15,11 @@ class BoxOffice {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.items != null) {
-      data['items'] = this.items!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (items != null) {
+      data['items'] = items!.map((v) => v.toJson()).toList();
     }
-    data['errorMessage'] = this.errorMessage;
+    data['errorMessage'] = errorMessage;
     return data;
   }
 }
@@ -53,14 +53,14 @@ class BoxOfficeFilm {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['rank'] = this.rank;
-    data['title'] = this.title;
-    data['image'] = this.image;
-    data['weekend'] = this.weekend;
-    data['gross'] = this.gross;
-    data['weeks'] = this.weeks;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['rank'] = rank;
+    data['title'] = title;
+    data['image'] = image;
+    data['weekend'] = weekend;
+    data['gross'] = gross;
+    data['weeks'] = weeks;
     return data;
   }
 }

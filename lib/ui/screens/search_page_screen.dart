@@ -19,9 +19,8 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.blackColor,
-      body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        child: Column(children: [
+      body: Column(
+        children: [
           _searchBarWidget(),
           BlocBuilder<SearchTitleCubit, SearchTitleState>(
             builder: (context, state) {
@@ -33,8 +32,10 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
                   ),
                 );
               } else if (state is SearchTitleSuccess) {
-                return ListMovieWidget()
-                    .searchMovieWidget(context, state.results, 0, 'Search');
+                return Expanded(
+                  child: ListMovieWidget()
+                      .searchMovieWidget(context, state.results, 0, 'Search'),
+                );
               }
               if (state is SearchTitleLoading) {
                 return const Center(
@@ -50,7 +51,7 @@ class _SearchPageScreenState extends State<SearchPageScreen> {
               );
             },
           )
-        ]),
+        ],
       ),
     );
   }

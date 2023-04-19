@@ -1,3 +1,5 @@
+import '../db/movie_table.dart';
+
 class MovieDetail {
   String? id;
   String? title;
@@ -91,7 +93,6 @@ class MovieDetail {
       this.tvSeriesInfo,
       this.tvEpisodeInfo,
       this.errorMessage});
-
   MovieDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];

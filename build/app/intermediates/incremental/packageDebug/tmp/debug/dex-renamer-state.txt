@@ -1,4 +1,4 @@
-#Sun Apr 09 23:00:57 MSK 2023
-base.0=C\:\\movie_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Tue Apr 18 10:10:16 MSK 2023
+base.0=C\:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
