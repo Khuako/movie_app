@@ -148,7 +148,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   if (state is RecommendedMovieSuccess) {
                     return Column(
                       children: [
-                        _recommendedMovieListWidget(
+                        recommendedMovieWidget(
                             context, state.recommendedMovieList),
                       ],
                     );
@@ -171,7 +171,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
         arguments: {'movieId': movieId, 'sourceScreen': 'Home'});
   }
 
-  SizedBox _recommendedMovieListWidget(
+  SizedBox recommendedMovieWidget(
       BuildContext context, List<RecommendedMovie> movieList) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .5,

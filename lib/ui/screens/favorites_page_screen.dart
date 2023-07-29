@@ -17,13 +17,18 @@ class _FavoritesPageScreenState extends State<FavoritesPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.blackColor,
-      body: SingleChildScrollView(
-          child: BlocBuilder<FavoriteListBloc, FavoriteListState>(
-        builder: (context, state) {
-          return ListMovieWidget().searchMovieWidget(
-              context, state.favouriteMovies ?? [], 1, 'favorites');
-        },
-      )),
+      body: Column(
+        children: [
+          BlocBuilder<FavoriteListBloc, FavoriteListState>(
+            builder: (context, state) {
+              return Expanded(
+                child: ListMovieWidget().searchMovieWidget(
+                    context, state.favouriteMovies ?? [], 1, 'favorites'),
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 }

@@ -203,7 +203,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\movie_app\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -1327,7 +1327,7 @@
             "outputFile": "com.example.movies_app-merged_res-11:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\movie_app\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

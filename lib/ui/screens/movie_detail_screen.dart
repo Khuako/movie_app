@@ -46,10 +46,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
             ),
           );
         } else if (state is MovieDetailSuccess) {
+          List<String> genreList =
+              state.movieDetail.genre?.split(',') ?? ['Action, Drama, Horror'];
           List<String> genres = [];
-          int n = state.movieDetail.genreList!.length;
+          int n = genreList.length;
           for (int i = 0; i < n; i++) {
-            genres.add(state.movieDetail.genreList![i].value!);
+            genres.add(genreList[i]);
           }
           return Scaffold(
             backgroundColor: Constants.blackColor,
@@ -86,8 +88,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                ListMovieWidget().listMovieWidget(context,
-                    state.movieDetail.similars!, 0, widget.sourceScreen),
               ],
             )),
           );
@@ -197,24 +197,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   Widget _summeryWidget(MovieDetail element) {
     List<String> genres = [];
-    int n = element.genreList!.length;
+    int n = element.genre!.split(',').length;
     for (int i = 0; i < n; i++) {
-      if (i == element.genreList!.length - 1 || i == 3) {
-        genres.add(element.genreList![i].value!);
+      if (i == n - 1 || i == 3) {
+        genres.add(element.genre!.split(',')[i]);
         break;
       } else {
-        genres.add(element.genreList![i].value!);
+        genres.add(element.genre!.split(',')[i]);
       }
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          element.contentRating ?? 'PG-13',
+          element.rated ?? 'PG-13',
           style: Constants.movieSummery,
         ),
         Text(
-          '${element.releaseDate} (${element.countryList![0].value})',
+          '${element.released} (${element.country!})',
           style: Constants.movieSummery,
         ),
         Text(
@@ -227,8 +227,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   }
 
   Row _scoreWidget(MovieDetail element) {
-    double n = element.metacriticRating != null
-        ? double.parse(element.metacriticRating!) / 100
+    double n = element.metascore != null
+        ? double.parse(element.metascore!) / 100
         : double.parse(element.imDbRating!) / 10;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -247,8 +247,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   freeColor: const Color.fromARGB(255, 25, 54, 31),
                   lineWidth: 3,
                   child: Text(
-                    element.metacriticRating != null
-                        ? element.metacriticRating!
+                    element.metascore != null
+                        ? element.metascore!
                         : (double.parse(element.imDbRating!) * 100).toString(),
                     style: const TextStyle(
                         color: Colors.blue, fontSize: 16, fontFamily: 'Ms'),
@@ -313,7 +313,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           SizedBox(
             height: 120,
             child: ListView.builder(
-              itemCount: element.actorList!.length,
+              itemCount: element.actors!.split(',').length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -327,7 +327,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: CachedNetworkImage(
-                        imageUrl: element.actorList![index].image ??
+                        imageUrl:
                             'https://sun6-21.userapi.com/s/v1/ig2/WQo3ZaP0xNQxBPqcpEq_eSkiKblznoWTr3l0PznJ5SDIZZxXHuI7LVwHqNnAeQWohZTDaNCvx7Xqvvr5KHTmuqdv.jpg?size=400x0&quality=96&crop=143,23,433,433&ava=1',
                         fit: BoxFit.cover,
                         maxHeightDiskCache: 200,
@@ -342,7 +342,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       height: 5,
                     ),
                     Text(
-                      element.actorList![index].name!,
+                      element.actors!.split(',')[index],
                       style: const TextStyle(
                           color: Constants.whiteColor, fontSize: 14),
                     )

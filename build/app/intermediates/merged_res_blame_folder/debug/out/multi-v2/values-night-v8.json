@@ -4,7 +4,7 @@
             "outputFile": "com.example.movies_app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Crixusjke\\Downloads\\movie_app-main (1)\\movie_app-main\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\movie_app\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

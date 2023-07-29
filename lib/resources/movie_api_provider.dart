@@ -19,8 +19,9 @@ import '../models/search_title.dart';
 
 class MovieApiProvider {
   Client client = Client();
-  final apiKey = "/k_cfscy5r0/";
+  final apiKey = "apikey=f12d069a";
   final baseUrl = "http://imdb-api.com/en/API/";
+  final baseUrlSearch = 'http://www.omdbapi.com/?';
   //https://imdb-api.com/en/API/ComingSoon/k_cfscy5r0
   Future<FilmsList> fetchMovieList() async {
     // print('entered');
@@ -56,7 +57,7 @@ class MovieApiProvider {
 
   Future<MovieDetail> fetchMovieDetail(String movieId) async {
     final response =
-        await client.get(Uri.parse(baseUrl + 'Title' + apiKey + movieId));
+        await client.get(Uri.parse(baseUrlSearch + 'i=' + movieId +'&'+ apiKey));
     return MovieDetail.fromJson(json.decode(response.body));
   }
 
